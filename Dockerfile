@@ -10,4 +10,5 @@ RUN pip install -r requirements.txt
 
 # Run the Application
 COPY main.py .
+COPY .env .
 CMD ["python", "-u", "main.py"]
