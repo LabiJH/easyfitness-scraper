@@ -1,5 +1,13 @@
 FROM python:3.9.23-bookworm
-WORKDIR /app
-ADD scrape.py .
-RUN pip install beautifulsoup4 python-dotenv
-CMD ["python", "./scrape.py"]
+
+ENV VIRTUAL_ENV="/opt/venv"
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Install dependencies:
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Run the Application
+COPY main.py .
+CMD ["python", "-u", "main.py"]
